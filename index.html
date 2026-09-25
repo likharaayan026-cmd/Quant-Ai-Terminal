@@ -2,808 +2,827 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width,
-                 initial-scale=1.0,
-                 maximum-scale=1.0,
-                 minimum-scale=1.0,
-                 user-scalable=no">
-
-  <meta name="theme-color" content="#0f172a">
-  <meta name="description" content="Privacy Policy for QuantAI Terminal">
-
-  <title>Privacy Policy • QuantAI Terminal</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap"
-        rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pulse Alpha · 9/20 EMA + Real Backtester</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      touch-action: pan-y;
-    }
-
-    body {
-      font-family: "Inter", sans-serif;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(99,102,241,.18), transparent 28%),
-        radial-gradient(circle at 90% 10%, rgba(14,165,233,.15), transparent 30%),
-        #070b14;
-      color: #e5e7eb;
-      min-height: 100vh;
-      overflow-x: hidden;
-      line-height: 1.75;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .background {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: -1;
-    }
-
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: .25;
-      animation: float 9s ease-in-out infinite;
-    }
-
-    .orb.one {
-      width: 220px;
-      height: 220px;
-      background: #6366f1;
-      top: 8%;
-      left: -80px;
-    }
-
-    .orb.two {
-      width: 260px;
-      height: 260px;
-      background: #06b6d4;
-      right: -100px;
-      top: 35%;
-      animation-delay: -3s;
-    }
-
-    .orb.three {
-      width: 200px;
-      height: 200px;
-      background: #8b5cf6;
-      bottom: 5%;
-      left: 40%;
-      animation-delay: -6s;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translate3d(0,0,0) scale(1);
-      }
-
-      50% {
-        transform: translate3d(0,-25px,0) scale(1.08);
-      }
-    }
-
-    .container {
-      width: min(100% - 28px, 900px);
-      margin: auto;
-      padding: 35px 0 50px;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-      padding: 42px 22px;
-      margin-bottom: 22px;
-
-      background: rgba(15,23,42,.72);
-      border: 1px solid rgba(255,255,255,.09);
-      border-radius: 30px;
-
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-
-      box-shadow:
-        0 25px 80px rgba(0,0,0,.35),
-        inset 0 1px 0 rgba(255,255,255,.05);
-
-      animation: heroIn .8s cubic-bezier(.2,.8,.2,1) both;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: rgba(99,102,241,.18);
-      filter: blur(50px);
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    @keyframes heroIn {
-      from {
-        opacity: 0;
-        transform: translateY(25px) scale(.97);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .badge {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 8px 14px;
-      border-radius: 999px;
-
-      background: rgba(99,102,241,.13);
-      border: 1px solid rgba(129,140,248,.25);
-
-      color: #a5b4fc;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #818cf8;
-      box-shadow: 0 0 14px #818cf8;
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-
-      50% {
-        transform: scale(1.5);
-        opacity: .55;
-      }
-    }
-
-    h1 {
-      position: relative;
-      font-family: "Manrope", sans-serif;
-      font-size: clamp(32px, 8vw, 58px);
-      line-height: 1.08;
-      font-weight: 800;
-      letter-spacing: -1.8px;
-      margin-bottom: 15px;
-
-      background: linear-gradient(
-        135deg,
-        #ffffff,
-        #c7d2fe 45%,
-        #67e8f9
-      );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      position: relative;
-      max-width: 620px;
-      margin: auto;
-      color: #94a3b8;
-      font-size: 14px;
-    }
-
-    .updated {
-      margin-top: 18px;
-      color: #64748b;
-      font-size: 12px;
-    }
-
-    .content {
-      display: grid;
-      gap: 15px;
-    }
-
-    .card {
-      position: relative;
-      padding: 25px 22px;
-
-      background: rgba(15,23,42,.66);
-      border: 1px solid rgba(255,255,255,.075);
-      border-radius: 23px;
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      box-shadow:
-        0 12px 40px rgba(0,0,0,.18),
-        inset 0 1px 0 rgba(255,255,255,.035);
-
-      opacity: 0;
-      transform: translateY(25px);
-      animation: cardIn .65s cubic-bezier(.2,.8,.2,1) forwards;
-    }
-
-    .card:nth-child(1) { animation-delay: .08s; }
-    .card:nth-child(2) { animation-delay: .14s; }
-    .card:nth-child(3) { animation-delay: .20s; }
-    .card:nth-child(4) { animation-delay: .26s; }
-    .card:nth-child(5) { animation-delay: .32s; }
-    .card:nth-child(6) { animation-delay: .38s; }
-    .card:nth-child(7) { animation-delay: .44s; }
-    .card:nth-child(8) { animation-delay: .50s; }
-    .card:nth-child(9) { animation-delay: .56s; }
-    .card:nth-child(10) { animation-delay: .62s; }
-
-    @keyframes cardIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .card:hover {
-      border-color: rgba(129,140,248,.22);
-      transform: translateY(-2px);
-      transition: .25s ease;
-    }
-
-    .heading {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin-bottom: 13px;
-    }
-
-    .icon {
-      width: 42px;
-      height: 42px;
-      flex: 0 0 42px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 13px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(99,102,241,.18),
-          rgba(6,182,212,.10)
-        );
-
-      border: 1px solid rgba(129,140,248,.18);
-
-      color: #a5b4fc;
-      font-size: 19px;
-    }
-
-    h2 {
-      font-family: "Manrope", sans-serif;
-      font-size: 18px;
-      font-weight: 800;
-      color: #f8fafc;
-      letter-spacing: -.3px;
-    }
-
-    .card p {
-      color: #a8b2c2;
-      font-size: 14px;
-    }
-
-    .card ul {
-      margin: 10px 0 0 19px;
-      color: #a8b2c2;
-      font-size: 14px;
-    }
-
-    .card li {
-      margin: 7px 0;
-      padding-left: 4px;
-    }
-
-    .highlight {
-      margin-top: 15px;
-      padding: 15px;
-
-      border-radius: 15px;
-      background: rgba(99,102,241,.08);
-      border: 1px solid rgba(129,140,248,.13);
-
-      color: #cbd5e1;
-      font-size: 13px;
-    }
-
-    .contact-card {
-      text-align: center;
-      padding: 30px 20px;
-    }
-
-    .contact-buttons {
-      display: grid;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-
-      min-height: 50px;
-      padding: 12px 16px;
-
-      border-radius: 15px;
-
-      background: rgba(255,255,255,.045);
-      border: 1px solid rgba(255,255,255,.08);
-
-      color: #e2e8f0;
-      font-size: 13px;
-      font-weight: 700;
-
-      transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease;
-    }
-
-    .contact-link:hover {
-      transform: translateY(-2px);
-      background: rgba(99,102,241,.12);
-      border-color: rgba(129,140,248,.25);
-    }
-
-    .contact-link:active {
-      transform: scale(.97);
-    }
-
-    .footer {
-      text-align: center;
-      padding: 28px 10px 5px;
-      color: #475569;
-      font-size: 12px;
-    }
-
-    .top-button {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-
-      width: 45px;
-      height: 45px;
-
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 50%;
-
-      background: rgba(15,23,42,.85);
-      color: #cbd5e1;
-
-      backdrop-filter: blur(15px);
-
-      display: grid;
-      place-items: center;
-
-      cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-
-      transition: .25s ease;
-      z-index: 20;
-    }
-
-    .top-button.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .top-button:active {
-      transform: scale(.9);
-    }
-
-    @media (min-width: 700px) {
-      .container {
-        padding-top: 55px;
-      }
-
-      .hero {
-        padding: 60px 35px;
-      }
-
-      .card {
-        padding: 29px;
-      }
-
-      .contact-buttons {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-      }
-    }
+    html, body { touch-action: pan-y; user-select: none; overflow-x: hidden; background-color: #030712; height: 100%; }
+    .fade-out { opacity: 0; pointer-events: none; transition: opacity 0.5s ease-out; }
+    .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+    .tv-lightweight-charts-legend { display: none !important; }
+    #chart-wrapper { touch-action: none; }
+    @keyframes radar-scan { 0% { transform: translateY(-100%); opacity: 0.3; } 50% { opacity: 0.8; } 100% { transform: translateY(100%); opacity: 0.3; } }
+    .animate-radar { animation: radar-scan 1.5s infinite ease-in-out; }
+    .price-value { word-break: break-all; white-space: normal; }
   </style>
 </head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
 
-<body>
-
-  <div class="background">
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-    <div class="orb three"></div>
+  <!-- Splash -->
+  <div id="splash-screen" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="relative flex items-center justify-center">
+      <div class="w-20 h-20 bg-indigo-600 rounded-3xl animate-ping opacity-25 absolute"></div>
+      <div class="w-20 h-20 bg-gradient-to-tr from-indigo-600 to-blue-500 rounded-3xl flex items-center justify-center text-white font-black text-3xl shadow-2xl shadow-indigo-500/50 animate-bounce">C</div>
+    </div>
+    <h1 class="mt-6 text-2xl font-black tracking-wider text-white">Pulse<span class="text-indigo-500"> Alpha</span></h1>
+    <p class="text-xs text-slate-500 mt-2 font-medium tracking-widest uppercase animate-pulse">Authenticating Session...</p>
   </div>
 
-  <main class="container">
+  <!-- AUTH -->
+  <div id="auth-container" class="hidden fixed inset-0 z-40 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6">
+      <div class="text-center space-y-1">
+        <h2 id="auth-title" class="text-2xl font-black text-white tracking-tight">Welcome Back</h2>
+        <p id="auth-subtitle" class="text-xs text-slate-400">Log in to access live market analytics</p>
+      </div>
+      <form id="auth-form" class="space-y-4">
+        <div id="field-name" class="hidden space-y-1">
+          <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Full Name</label>
+          <input type="text" id="input-name" placeholder="John Doe" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+        </div>
+        <div id="field-mobile" class="hidden space-y-1">
+          <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Mobile Number</label>
+          <input type="tel" id="input-mobile" placeholder="10-digit mobile" maxlength="10" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+        </div>
+        <div class="space-y-1">
+          <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Email Address</label>
+          <input type="email" id="input-email" required placeholder="trader@example.com" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+        </div>
+        <div class="space-y-1">
+          <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Password</label>
+          <input type="password" id="input-password" required placeholder="••••••••" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+        </div>
+        <p id="auth-error" class="text-[11px] text-rose-400 text-center font-bold hidden"></p>
+        <button type="submit" id="auth-btn" class="w-full bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white font-bold py-3 rounded-xl text-xs shadow-lg shadow-indigo-600/30 transition">Log In</button>
+      </form>
+      <div class="text-center pt-2 border-t border-slate-800/80">
+        <p class="text-xs text-slate-400">
+          <span id="auth-toggle-text">Don't have an account?</span>
+          <button type="button" id="auth-toggle-btn" class="text-indigo-400 font-bold ml-1 hover:underline">Sign Up</button>
+        </p>
+      </div>
+    </div>
+  </div>
 
-    <!-- HERO -->
-    <section class="hero">
+  <!-- PENDING -->
+  <div id="pending-container" class="hidden fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md p-8 rounded-3xl shadow-2xl text-center space-y-5 border border-amber-500/20">
+      <div class="w-20 h-20 bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full flex items-center justify-center mx-auto text-3xl font-bold animate-pulse">⏳</div>
+      <div class="space-y-2">
+        <h2 class="text-2xl font-black text-white tracking-tight">Approval Pending</h2>
+        <p class="text-xs text-slate-400 leading-relaxed">Your account request has been submitted to the administrator.</p>
+      </div>
+      <button type="button" id="pending-recheck-btn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs transition">🔄 Check Approval Status</button>
+      <button type="button" id="pending-logout-btn" class="w-full bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 px-4 py-2 rounded-xl border border-rose-500/20 font-bold text-xs transition">Logout</button>
+    </div>
+  </div>
 
-      <div class="badge">
-        <span class="badge-dot"></span>
-        Privacy & Security
+  <!-- APP -->
+  <div id="app-container" class="hidden flex-col min-h-screen">
+    <header class="bg-slate-900/95 backdrop-blur border-b border-slate-800 sticky top-0 z-30">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-lg shadow-indigo-500/20">C</div>
+          <span class="text-xl font-black text-white tracking-tight">Pulse<span class="text-indigo-500"> Alpha</span></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="openBacktester()" class="flex items-center gap-1.5 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 px-3 py-1.5 rounded-xl border border-indigo-500/20 font-bold text-xs transition active:scale-95">⚡ Backtest</button>
+          <button type="button" id="header-logout-btn" class="flex items-center gap-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 px-3.5 py-1.5 rounded-xl border border-rose-500/20 font-bold text-xs transition active:scale-95">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto w-full p-3 sm:p-4 space-y-3">
+      <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 flex flex-wrap justify-between items-center gap-2">
+        <div class="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1">
+          <button onclick="changeAsset('ETHUSDT','Ethereum')" id="btn-ETHUSDT" class="px-3 py-1.5 rounded-lg font-bold text-xs bg-indigo-600 text-white whitespace-nowrap">ETH/USDT</button>
+          <button onclick="changeAsset('BTCUSDT','Bitcoin')" id="btn-BTCUSDT" class="px-3 py-1.5 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 whitespace-nowrap">BTC/USDT</button>
+          <button onclick="changeAsset('SOLUSDT','Solana')" id="btn-SOLUSDT" class="px-3 py-1.5 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 whitespace-nowrap">SOL/USDT</button>
+          <button onclick="changeAsset('XRPUSDT','XRP')" id="btn-XRPUSDT" class="px-3 py-1.5 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 whitespace-nowrap">XRP/USDT</button>
+          <button onclick="changeAsset('TAOUSDT','Bittensor')" id="btn-TAOUSDT" class="px-3 py-1.5 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 whitespace-nowrap">TAO/USDT</button>
+          <button onclick="changeAsset('AAVEUSDT','Aave')" id="btn-AAVEUSDT" class="px-3 py-1.5 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 whitespace-nowrap">AAVE/USDT</button>
+          <button onclick="changeAsset('AVAXUSDT','Avalanche')" id="btn-AVAXUSDT" class="px-3 py-1.5 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 whitespace-nowrap">AVAX/USDT</button>
+          <button onclick="changeAsset('ZECUSDT','Zcash')" id="btn-ZECUSDT" class="px-3 py-1.5 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 whitespace-nowrap">ZEC/USDT</button>
+          <button onclick="changeAsset('PAXGUSDT','PAX Gold')" id="btn-PAXGUSDT" class="px-3 py-1.5 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 whitespace-nowrap">PAXG/USDT</button>
+        </div>
+        <div class="flex items-center bg-slate-950 p-1 rounded-lg border border-slate-800">
+          <button onclick="changeTimeframe('5m')" id="tf-5m" class="px-2.5 py-1 text-[11px] font-bold text-slate-400 rounded">5m</button>
+          <button onclick="changeTimeframe('15m')" id="tf-15m" class="px-2.5 py-1 text-[11px] font-bold bg-indigo-600 text-white rounded">15m</button>
+          <button onclick="changeTimeframe('1h')" id="tf-1h" class="px-2.5 py-1 text-[11px] font-bold text-slate-400 rounded">1h</button>
+          <button onclick="changeTimeframe('4h')" id="tf-4h" class="px-2.5 py-1 text-[11px] font-bold text-slate-400 rounded">4h</button>
+        </div>
+        <button id="run-ai-btn" onclick="runAnalysisEngine()" class="bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-4 py-1.5 rounded-lg font-bold text-xs shadow-md flex items-center gap-2">
+          <span id="btn-spinner" class="hidden animate-spin">⚡</span>
+          <span id="btn-text">Scan Market Setup</span>
+        </button>
       </div>
 
-      <h1>Privacy Policy</h1>
-
-      <p>
-        Your privacy matters to us. This policy explains how
-        QuantAI Terminal handles information when you use the application.
-      </p>
-
-      <div class="updated">
-        Last updated: September 6, 2026
+      <div id="chart-wrapper" class="bg-slate-900 rounded-xl border border-slate-800 p-2 h-[380px] relative overflow-hidden">
+        <div class="absolute top-3 left-3 z-20 bg-slate-950/90 backdrop-blur px-3 py-1 rounded-md border border-slate-800 text-[11px] font-bold flex items-center gap-3 pointer-events-none">
+          <span class="flex items-center gap-1 text-blue-400"><span class="w-2.5 h-1 bg-blue-500 rounded"></span> 9 EMA</span>
+          <span class="flex items-center gap-1 text-red-500"><span class="w-2.5 h-1 bg-red-600 rounded"></span> 20 EMA</span>
+          <span class="text-[10px] text-emerald-400 font-extrabold ml-2">● LIVE FEED</span>
+        </div>
+        <div id="chart-loading" class="hidden absolute inset-0 z-30 bg-slate-950/80 backdrop-blur-sm flex flex-col items-center justify-center">
+          <div class="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+          <span class="text-xs font-bold text-slate-300 mt-2">Loading 2-month chart...</span>
+        </div>
+        <div id="tv-dark-chart" class="w-full h-full"></div>
       </div>
 
-    </section>
-
-    <section class="content">
-
-      <!-- 1 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">👋</div>
-          <h2>Welcome</h2>
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+          <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+            <span class="text-[10px] text-slate-500 block font-bold">9/20 EMA TREND</span>
+            <strong id="metric-ema" class="text-slate-300">--</strong>
+          </div>
+          <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+            <span class="text-[10px] text-slate-500 block font-bold">LIQUIDITY SWEEP</span>
+            <strong id="metric-sweep" class="text-slate-300">--</strong>
+          </div>
+          <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+            <span class="text-[10px] text-slate-500 block font-bold">MARKET BIAS</span>
+            <strong id="metric-volatility" class="text-slate-300">--</strong>
+          </div>
+          <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+            <span class="text-[10px] text-slate-500 block font-bold">VOLUME</span>
+            <strong id="metric-volume" class="text-slate-300">--</strong>
+          </div>
         </div>
+        <div id="ai-analysis-output" class="bg-slate-950 p-4 rounded-xl border border-slate-800 min-h-[110px] flex items-center justify-center">
+          <div class="text-center">
+            <h4 class="font-bold text-slate-300 text-xs">Engine Ready</h4>
+            <p class="text-[10px] text-slate-500 mt-0.5">Click <strong>"Scan Market Setup"</strong></p>
+          </div>
+        </div>
+      </div>
+    </main>
 
-        <p>
-          Welcome to QuantAI Terminal. We respect your privacy and are
-          committed to being transparent about the information used while
-          providing trading analysis and backtesting features.
+    <footer class="bg-slate-900 border-t border-slate-800/80 py-3 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <p class="text-[11px] text-slate-500">
+          <a href="https://pulse-alpha-privacy-policy.vercel.app" target="_blank" class="text-indigo-400 font-bold hover:underline">Terms and Conditions & Disclaimer</a>
         </p>
-      </article>
-
-      <!-- 2 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">📋</div>
-          <h2>Information We Collect</h2>
-        </div>
-
-        <p>
-          Depending on how you use the application, information may include:
-        </p>
-
-        <ul>
-          <li>Trading strategy information entered by you.</li>
-          <li>Selected trading assets and timeframes.</li>
-          <li>Backtesting configuration and simulated trade parameters.</li>
-          <li>Application preferences stored locally on your device.</li>
-          <li>Market data required to provide application functionality.</li>
-        </ul>
-      </article>
-
-      <!-- 3 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">⚙️</div>
-          <h2>How We Use Information</h2>
-        </div>
-
-        <p>
-          Information is used to operate and improve application features,
-          including strategy analysis, market-data visualization,
-          backtesting calculations and simulated trading reports.
-        </p>
-
-        <div class="highlight">
-          We do not use your trading strategy as a public profile or
-          intentionally publish your strategy information.
-        </div>
-      </article>
-
-      <!-- 4 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">📈</div>
-          <h2>Trading & Market Data</h2>
-        </div>
-
-        <p>
-          The application may use third-party market-data services to obtain
-          cryptocurrency price and candlestick information. Market data is
-          used to calculate and display simulated backtesting results.
-        </p>
-
-        <div class="highlight">
-          Backtesting results are simulations based on historical or available
-          market data and should not be considered guaranteed future results.
-        </div>
-      </article>
-
-      <!-- 5 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">🤖</div>
-          <h2>AI-Powered Features</h2>
-        </div>
-
-        <p>
-          Certain features may use artificial intelligence to interpret
-          strategy descriptions, organize trading rules or assist with
-          analysis. Information provided to AI-powered features may be
-          processed by the relevant service provider to perform the requested
-          functionality.
-        </p>
-      </article>
-
-      <!-- 6 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">💾</div>
-          <h2>Local Storage</h2>
-        </div>
-
-        <p>
-          Some application settings, session information and backtesting
-          history may be stored locally on your device using browser or
-          application storage technologies.
-        </p>
-
-        <p style="margin-top:10px;">
-          Clearing application data or browser storage may remove locally
-          stored information.
-        </p>
-      </article>
-
-      <!-- 7 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">🔗</div>
-          <h2>Third-Party Services</h2>
-        </div>
-
-        <p>
-          The application may interact with third-party services for
-          functionality such as market data, charts, fonts, artificial
-          intelligence processing and other technical services.
-        </p>
-
-        <p style="margin-top:10px;">
-          Third-party services may have their own privacy policies and terms.
-          We recommend reviewing the policies of services you interact with.
-        </p>
-      </article>
-
-      <!-- 8 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">🔐</div>
-          <h2>Data Security</h2>
-        </div>
-
-        <p>
-          We take reasonable measures to protect information used by the
-          application. However, no internet transmission, electronic storage
-          system or software application can be guaranteed to be completely
-          secure.
-        </p>
-      </article>
-
-      <!-- 9 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">🧒</div>
-          <h2>Children's Privacy</h2>
-        </div>
-
-        <p>
-          The application is not designed to knowingly collect personal
-          information from children. If you believe that personal information
-          has been provided by a child without appropriate permission, please
-          contact us so that the matter can be reviewed.
-        </p>
-      </article>
-
-      <!-- 10 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">⚠️</div>
-          <h2>Financial Disclaimer</h2>
-        </div>
-
-        <p>
-          QuantAI Terminal is an educational and analytical tool.
-          Backtesting results, AI-generated analysis and simulated trades are
-          not financial advice, investment advice or a guarantee of future
-          performance.
-        </p>
-
-        <div class="highlight">
-          Cryptocurrency and financial markets involve substantial risk.
-          Always conduct your own research and make independent decisions.
-        </div>
-      </article>
-
-      <!-- 11 -->
-      <article class="card">
-        <div class="heading">
-          <div class="icon">🔄</div>
-          <h2>Changes to This Policy</h2>
-        </div>
-
-        <p>
-          This Privacy Policy may be updated from time to time to reflect
-          changes in the application, services or legal requirements.
-          Updated versions will be made available through the application
-          or the relevant publishing platform.
-        </p>
-      </article>
-
-      <!-- CONTACT -->
-      <article class="card contact-card">
-
-        <div class="heading" style="justify-content:center;">
-          <div class="icon">💬</div>
-          <h2>Contact Us</h2>
-        </div>
-
-        <p>
-          If you have questions, concerns or requests regarding this
-          Privacy Policy, you can contact us using the options below.
-        </p>
-
-        <div class="contact-buttons">
-
-          <a
-            class="contact-link"
-            href="https://aayanindustries.shop"
-            target="_blank"
-            rel="noopener noreferrer">
-            🌐 Official Website
-          </a>
-
-          <a
-            class="contact-link"
-            href="mailto:likharaayan026@gmail.com">
-            ✉️ Contact Support
-          </a>
-
-          <a
-            class="contact-link"
-            href="https://play.google.com/store/apps/details?id=com.aayanindustries.shop"
-            target="_blank"
-            rel="noopener noreferrer">
-            ▶️ Google Play
-          </a>
-
-        </div>
-
-      </article>
-
-    </section>
-
-    <footer class="footer">
-      © 2026 QuantAI Terminal
+      </div>
     </footer>
+  </div>
 
-  </main>
+  <!-- BACKTEST MODAL -->
+  <div id="backtest-modal" class="hidden fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md overflow-y-auto p-3 sm:p-6">
+    <div class="max-w-3xl mx-auto glass-card rounded-3xl p-5 sm:p-6 space-y-5 border border-slate-800">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div>
+          <h2 class="text-xl font-black text-white">⚡ Real Strategy Backtester</h2>
+          <p class="text-[11px] text-slate-400 mt-0.5">Describe strategy → AI parses → runs on real Binance candles</p>
+        </div>
+        <button onclick="closeBacktester()" class="text-slate-400 hover:text-white text-2xl font-bold leading-none">×</button>
+      </div>
 
-  <button
-    class="top-button"
-    id="topButton"
-    aria-label="Back to top">
-    ↑
-  </button>
+      <div class="space-y-4">
+        <div>
+          <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Strategy Name</label>
+          <input id="bt-name" type="text" placeholder="e.g. 9/20 EMA Crossover" class="w-full mt-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Strategy Description (Natural Language)</label>
+          <textarea id="bt-desc" rows="4" placeholder="e.g. Buy when 9 EMA crosses above 20 EMA. Exit when 9 EMA crosses below 20 EMA. Stop loss 1%." class="w-full mt-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-indigo-500 font-mono"></textarea>
+          <button onclick="parseStrategy()" class="mt-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl font-bold text-xs transition">🔍 Parse with AI</button>
+        </div>
+
+        <div id="bt-parse-status" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs"></div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="text-[11px] font-bold text-slate-400 uppercase">Asset</label>
+            <select id="bt-asset" class="w-full mt-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
+              <option value="BTCUSDT">BTC/USDT</option>
+              <option value="ETHUSDT" selected>ETH/USDT</option>
+              <option value="SOLUSDT">SOL/USDT</option>
+              <option value="XRPUSDT">XRP/USDT</option>
+              <option value="TAOUSDT">TAO/USDT</option>
+              <option value="AAVEUSDT">AAVE/USDT</option>
+              <option value="AVAXUSDT">AVAX/USDT</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-slate-400 uppercase">Timeframe</label>
+            <select id="bt-tf" class="w-full mt-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
+              <option value="5m">5m</option>
+              <option value="15m" selected>15m</option>
+              <option value="1h">1h</option>
+              <option value="4h">4h</option>
+              <option value="1d">1d</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-slate-400 uppercase">Candles</label>
+            <select id="bt-limit" class="w-full mt-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
+              <option value="500">500</option>
+              <option value="1000" selected>1000</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-slate-400 uppercase">Capital</label>
+            <input id="bt-capital" type="number" value="10000" class="w-full mt-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white font-mono">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-slate-400 uppercase">Risk %</label>
+            <input id="bt-risk" type="number" value="1" step="0.1" class="w-full mt-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white font-mono">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-slate-400 uppercase">R:R</label>
+            <input id="bt-rr" type="number" value="2" step="0.5" class="w-full mt-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white font-mono">
+          </div>
+        </div>
+
+        <button id="bt-run-btn" onclick="runRealBacktest()" class="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-black py-3 rounded-xl text-sm shadow-lg shadow-indigo-600/30 active:scale-[0.98]">▶ Run Real Backtest</button>
+      </div>
+
+      <div id="bt-progress" class="hidden space-y-3">
+        <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+          <div id="bt-progress-fill" class="bg-gradient-to-r from-indigo-500 to-cyan-400 h-full w-0 transition-all duration-300"></div>
+        </div>
+        <div id="bt-progress-log" class="bg-slate-950 rounded-xl p-3 text-[11px] font-mono text-slate-400 h-24 overflow-y-auto border border-slate-800"></div>
+      </div>
+
+      <div id="bt-results" class="hidden space-y-4">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-center">
+            <span class="text-[10px] text-slate-500 uppercase font-mono">Net ROI</span>
+            <div id="bt-roi" class="text-lg font-black font-mono mt-1">0%</div>
+          </div>
+          <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-center">
+            <span class="text-[10px] text-slate-500 uppercase font-mono">Win Rate</span>
+            <div id="bt-winrate" class="text-lg font-black font-mono mt-1 text-white">0%</div>
+          </div>
+          <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-center">
+            <span class="text-[10px] text-slate-500 uppercase font-mono">Trades</span>
+            <div id="bt-trades" class="text-lg font-black font-mono mt-1 text-white">0</div>
+          </div>
+          <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-center">
+            <span class="text-[10px] text-slate-500 uppercase font-mono">Max DD</span>
+            <div id="bt-dd" class="text-lg font-black font-mono mt-1 text-rose-400">0%</div>
+          </div>
+        </div>
+        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
+          <span class="text-[10px] text-slate-500 uppercase font-mono block mb-2">Equity Curve</span>
+          <canvas id="bt-equity-chart" height="120"></canvas>
+        </div>
+        <div class="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+          <div class="px-3 py-2 border-b border-slate-800"><span class="text-xs font-bold text-white">Trade Log</span></div>
+          <div class="max-h-64 overflow-y-auto">
+            <table class="w-full text-[11px] font-mono">
+              <thead class="bg-slate-950 sticky top-0">
+                <tr class="text-slate-500">
+                  <th class="py-2 px-2 text-left">#</th>
+                  <th class="py-2 px-2 text-left">Type</th>
+                  <th class="py-2 px-2 text-left">Entry</th>
+                  <th class="py-2 px-2 text-left">Exit</th>
+                  <th class="py-2 px-2 text-left">P/L</th>
+                  <th class="py-2 px-2 text-left">Result</th>
+                </tr>
+              </thead>
+              <tbody id="bt-trade-rows"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    /* Prevent browser zoom */
-    document.addEventListener("gesturestart", function(e) {
-      e.preventDefault();
-    });
+    // ============= FIREBASE =============
+    const firebaseConfig = {
+      apiKey: "AIzaSyBt3iYcR4SijEJqtrBlH8mNr292vakgJFQ",
+      authDomain: "figo-movies.firebaseapp.com",
+      databaseURL: "https://figo-movies-default-rtdb.firebaseio.com",
+      projectId: "figo-movies",
+      storageBucket: "figo-movies.firebasestorage.app",
+      messagingSenderId: "425238806262",
+      appId: "1:425238806262:web:7d23814e4b550695bb76d7"
+    };
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(()=>{});
 
-    document.addEventListener("gesturechange", function(e) {
-      e.preventDefault();
-    });
+    // ============= STATE =============
+    let isSignupMode = false;
+    let userStatusListener = null;
+    let currentSymbol = 'ETHUSDT';
+    let currentTimeframe = '15m';
+    let isAnalyzing = false;
+    let darkChart=null, candleSeries=null, ema9Series=null, ema20Series=null;
+    let chartLines = [];
+    let ws = null;
+    let currentCandles = [], currentVolumes = [];
+    let chartBootstrapped = false;
+    let isLoggingOut = false;
+    let parsedStrategy = null;
+    let btEquityChart = null;
 
-    document.addEventListener("gestureend", function(e) {
-      e.preventDefault();
-    });
+    const allSymbols = ['BTCUSDT','ETHUSDT','SOLUSDT','XRPUSDT','TAOUSDT','AAVEUSDT','AVAXUSDT','ZECUSDT','PAXGUSDT'];
+    const twoDecimalSymbols = ['BTCUSDT','ETHUSDT','SOLUSDT','PAXGUSDT'];
+    const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-    let lastTouchEnd = 0;
+    // ============= SPLASH =============
+    function hideSplashScreen() {
+      const s = document.getElementById('splash-screen');
+      if (s && !s.classList.contains('fade-out')) { s.classList.add('fade-out'); setTimeout(()=>s.remove(),500); }
+    }
 
-    document.addEventListener("touchend", function(e) {
-      const now = Date.now();
-
-      if (now - lastTouchEnd <= 300) {
-        e.preventDefault();
-      }
-
-      lastTouchEnd = now;
-    }, { passive: false });
-
-    document.addEventListener("wheel", function(e) {
-      if (e.ctrlKey) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-
-    document.addEventListener("keydown", function(e) {
-      if (
-        (e.ctrlKey || e.metaKey) &&
-        ["+", "-", "=", "0"].includes(e.key)
-      ) {
-        e.preventDefault();
-      }
-    });
-
-    /* Back to top button */
-    const topButton = document.getElementById("topButton");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 500) {
-        topButton.classList.add("show");
+    // ============= AUTH UI =============
+    function showAuthError(msg) {
+      const el = document.getElementById('auth-error');
+      if (!el) return;
+      if (msg) { el.innerText = msg; el.classList.remove('hidden'); }
+      else { el.innerText = ''; el.classList.add('hidden'); }
+    }
+    window.toggleAuthMode = function() {
+      isSignupMode = !isSignupMode;
+      showAuthError('');
+      const t = document.getElementById('auth-title'), s = document.getElementById('auth-subtitle');
+      const nf = document.getElementById('field-name'), mf = document.getElementById('field-mobile');
+      const btn = document.getElementById('auth-btn');
+      const tt = document.getElementById('auth-toggle-text'), tb = document.getElementById('auth-toggle-btn');
+      if (isSignupMode) {
+        t.innerText='Create Account'; s.innerText='Request access';
+        nf.classList.remove('hidden'); mf.classList.remove('hidden');
+        btn.innerText='Request Access'; tt.innerText='Already have an account?'; tb.innerText='Log In';
       } else {
-        topButton.classList.remove("show");
+        t.innerText='Welcome Back'; s.innerText='Log in to access live market analytics';
+        nf.classList.add('hidden'); mf.classList.add('hidden');
+        btn.innerText='Log In'; tt.innerText="Don't have an account?"; tb.innerText='Sign Up';
       }
+    };
+
+    function emailToKey(e){ return e.toLowerCase().trim().replace(/\./g,'_dot_').replace(/@/g,'_at_'); }
+    function isUserApproved(d){
+      if (!d) return false;
+      const st = (d.status||'').toString().toLowerCase().trim();
+      if (st==='approved') return true;
+      if (d.approved===true) return true;
+      if (typeof d.approved==='string' && d.approved.toLowerCase().trim()==='true') return true;
+      return false;
+    }
+
+    window.handleAuth = async function(ev) {
+      ev.preventDefault();
+      showAuthError('');
+      const email = document.getElementById('input-email').value.trim();
+      const password = document.getElementById('input-password').value;
+      const btn = document.getElementById('auth-btn');
+      const orig = btn.innerText;
+      if (isSignupMode) {
+        const name = document.getElementById('input-name').value.trim();
+        const mobile = document.getElementById('input-mobile').value.trim();
+        if (!name || name.length<2) return showAuthError('Please enter your full name.');
+        if (!/^[0-9]{10}$/.test(mobile)) return showAuthError('Enter valid 10-digit mobile.');
+        if (password.length<6) return showAuthError('Password min 6 chars.');
+        btn.innerText='Creating...'; btn.disabled=true;
+        try {
+          const cred = await auth.createUserWithEmailAndPassword(email, password);
+          const uid = cred.user.uid;
+          let pre = false;
+          try { const s = await db.ref('pre_approved_emails/'+emailToKey(email)).once('value'); pre = s.exists(); } catch(e){}
+          await db.ref('users/'+uid).set({ name, mobile, email, status: pre?'approved':'pending', approved: pre, createdAt: firebase.database.ServerValue.TIMESTAMP });
+        } catch (err) {
+          let m='Signup failed.';
+          if (err.code==='auth/email-already-in-use') m='Email already registered.';
+          else if (err.code==='auth/invalid-email') m='Invalid email.';
+          else if (err.code==='auth/weak-password') m='Weak password.';
+          showAuthError(m); btn.innerText=orig; btn.disabled=false;
+        }
+      } else {
+        btn.innerText='Logging in...'; btn.disabled=true;
+        try { await auth.signInWithEmailAndPassword(email, password); }
+        catch (err) {
+          let m='Login failed.';
+          if (err.code==='auth/user-not-found') m='No account with this email.';
+          else if (err.code==='auth/wrong-password' || err.code==='auth/invalid-credential') m='Wrong email or password.';
+          showAuthError(m); btn.innerText=orig; btn.disabled=false;
+        }
+      }
+    };
+
+    window.handleLogout = async function() {
+      if (isLoggingOut) return;
+      isLoggingOut = true;
+      try {
+        if (userStatusListener) { try { userStatusListener.off(); } catch(e){} userStatusListener=null; }
+        if (ws) { try { ws.onclose=null; ws.close(); } catch(e){} ws=null; }
+        if (darkChart) { try { darkChart.remove(); } catch(e){} }
+        darkChart=null; candleSeries=null; ema9Series=null; ema20Series=null;
+        chartLines=[]; currentCandles=[]; currentVolumes=[]; chartBootstrapped=false;
+        await auth.signOut();
+        showScreen('auth');
+      } catch(e) { showScreen('auth'); }
+      finally { setTimeout(()=>{ isLoggingOut=false; }, 800); }
+    };
+
+    function showScreen(screen) {
+      const a = document.getElementById('auth-container');
+      const p = document.getElementById('pending-container');
+      const app = document.getElementById('app-container');
+      a.classList.add('hidden'); p.classList.add('hidden'); app.classList.add('hidden'); app.classList.remove('flex');
+      if (screen==='auth') {
+        isSignupMode=false;
+        document.getElementById('auth-title').innerText='Welcome Back';
+        document.getElementById('auth-subtitle').innerText='Log in to access live market analytics';
+        document.getElementById('field-name').classList.add('hidden');
+        document.getElementById('field-mobile').classList.add('hidden');
+        const btn = document.getElementById('auth-btn'); btn.innerText='Log In'; btn.disabled=false;
+        document.getElementById('auth-toggle-text').innerText="Don't have an account?";
+        document.getElementById('auth-toggle-btn').innerText='Sign Up';
+        document.getElementById('input-email').value=''; document.getElementById('input-password').value='';
+        document.getElementById('input-name').value=''; document.getElementById('input-mobile').value='';
+        showAuthError(''); a.classList.remove('hidden');
+      } else if (screen==='pending') p.classList.remove('hidden');
+      else if (screen==='app') {
+        app.classList.remove('hidden'); app.classList.add('flex');
+        if (!chartBootstrapped || !darkChart) {
+          chartBootstrapped = true;
+          setTimeout(()=>{ buildDarkCanvasChart(); loadAssetData(); }, 50);
+        }
+      }
+    }
+
+    auth.onAuthStateChanged(async (user) => {
+      hideSplashScreen();
+      if (userStatusListener) { try { userStatusListener.off(); } catch(e){} userStatusListener=null; }
+      if (!user) { if (!isLoggingOut) showScreen('auth'); return; }
+      const userRef = db.ref('users/'+user.uid);
+      try {
+        const snap = await userRef.once('value');
+        let data = snap.val();
+        if (!data) {
+          await userRef.set({ name: user.displayName||'User', mobile:'', email:user.email, status:'pending', approved:false, createdAt: firebase.database.ServerValue.TIMESTAMP });
+          data = { status:'pending', approved:false };
+        }
+        const ok = isUserApproved(data);
+        if (ok) showScreen('app'); else showScreen('pending');
+        userStatusListener = userRef.on('value', (s) => {
+          const v = s.val();
+          if (isUserApproved(v)) showScreen('app'); else showScreen('pending');
+        });
+      } catch (err) { showScreen('pending'); }
     });
 
-    topButton.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    // ============= FORMAT =============
+    function formatPrice(price, symbol=currentSymbol) {
+      if (price==null || isNaN(price)) return twoDecimalSymbols.includes(symbol)?'0.00':'0.000';
+      const n = Number(price);
+      return twoDecimalSymbols.includes(symbol) ? n.toFixed(2) : n.toFixed(3);
+    }
+    function formatTimeFull(time) {
+      const d = new Date(time*1000);
+      const day = d.getDate().toString().padStart(2,'0');
+      const mon = monthNames[d.getMonth()];
+      let h = d.getHours(); const m = d.getMinutes().toString().padStart(2,'0');
+      const ap = h>=12?'PM':'AM'; h = h%12||12;
+      return `${day} ${mon}, ${h.toString().padStart(2,'0')}:${m} ${ap}`;
+    }
+
+    // ============= CHART =============
+    function buildDarkCanvasChart() {
+      const container = document.getElementById('tv-dark-chart');
+      if (!container) return;
+      container.innerHTML = '';
+      if (darkChart) { try { darkChart.remove(); } catch(e){} darkChart=null; }
+      darkChart = LightweightCharts.createChart(container, {
+        width: container.clientWidth, height: container.clientHeight,
+        layout: { background: { type:'solid', color:'#090d16' }, textColor:'#64748b' },
+        grid: { vertLines:{ color:'#1e293b' }, horzLines:{ color:'#1e293b' } },
+        crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+        priceScale: { borderColor:'#334155' },
+        timeScale: { borderColor:'#334155', timeVisible:true, secondsVisible:false, tickMarkFormatter:(t)=>formatTimeFull(t) },
+        localization: { timeFormatter:(t)=>formatTimeFull(t) }
       });
-    });
-  </script>
+      candleSeries = darkChart.addCandlestickSeries({ upColor:'#22c55e', downColor:'#ef4444', borderDownColor:'#ef4444', borderUpColor:'#22c55e', wickDownColor:'#ef4444', wickUpColor:'#22c55e' });
+      ema9Series = darkChart.addLineSeries({ color:'#3b82f6', lineWidth:2, priceLineVisible:false, lastValueVisible:false });
+      ema20Series = darkChart.addLineSeries({ color:'#ef4444', lineWidth:2, priceLineVisible:false, lastValueVisible:false });
+    }
 
-</body>
-</html>
+    function computeEMA(candles, period) {
+      const k = 2/(period+1);
+      const arr = []; let prev = candles[0]?.close || 0;
+      for (let i=0;i<candles.length;i++){
+        const v = i===0 ? candles[i].close : candles[i].close*k + prev*(1-k);
+        arr.push({ time: candles[i].time, value: v });
+        prev = v;
+      }
+      return arr;
+    }
+
+    function connectLiveWebSocket() {
+      if (ws) { try { ws.onclose=null; ws.close(); } catch(e){} }
+      ws = new WebSocket(`wss://stream.binance.com:9443/ws/${currentSymbol.toLowerCase()}@kline_${currentTimeframe}`);
+      ws.onmessage = (e) => {
+        const m = JSON.parse(e.data); if (!m?.k) return;
+        const k = m.k;
+        const c = { time: Math.floor(k.t/1000), open:+k.o, high:+k.h, low:+k.l, close:+k.c };
+        const v = +k.v;
+        if (currentCandles.length>0 && candleSeries) {
+          const last = currentCandles.length-1;
+          if (currentCandles[last].time === c.time) { currentCandles[last]=c; currentVolumes[last]=v; }
+          else if (c.time > currentCandles[last].time) { currentCandles.push(c); currentVolumes.push(v); }
+          candleSeries.update(c);
+          ema9Series.setData(computeEMA(currentCandles,9));
+          ema20Series.setData(computeEMA(currentCandles,20));
+        }
+      };
+    }
+
+    async function loadAssetData() {
+      resetAnalysisUI();
+      const l = document.getElementById('chart-loading'); if (l) l.classList.remove('hidden');
+      try {
+        const url = `https://api.binance.com/api/v3/klines?symbol=${currentSymbol}&interval=${currentTimeframe}&limit=1500`;
+        const res = await fetch(url);
+        const raw = await res.json();
+        currentCandles = raw.map(d => ({ time: Math.floor(d[0]/1000), open:+d[1], high:+d[2], low:+d[3], close:+d[4] }));
+        currentVolumes = raw.map(d => +d[5]);
+        if (candleSeries) {
+          candleSeries.setData(currentCandles);
+          ema9Series.setData(computeEMA(currentCandles,9));
+          ema20Series.setData(computeEMA(currentCandles,20));
+          darkChart.timeScale().fitContent();
+          connectLiveWebSocket();
+        }
+      } catch (e) { console.error(e); }
+      finally { if (l) l.classList.add('hidden'); }
+    }
+
+    function resetAnalysisUI() {
+      clearCanvasLines();
+      const out = document.getElementById('ai-analysis-output');
+      if (out) out.innerHTML = `<div class="text-center"><h4 class="font-bold text-slate-300 text-xs">New Market Loaded</h4><p class="text-[10px] text-slate-500 mt-0.5">Click "Scan Market Setup" for ${currentSymbol} on ${currentTimeframe}.</p></div>`;
+      ['metric-ema','metric-sweep','metric-volatility','metric-volume'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.innerText='--'; el.className='text-slate-300'; }
+      });
+    }
+
+    function clearCanvasLines() {
+      if (!candleSeries) return;
+      chartLines.forEach(l => { try { candleSeries.removePriceLine(l); } catch(e){} });
+      chartLines = [];
+    }
+
+    // ============= ORIGINAL 9/20 EMA SCAN =============
+    function calculate2Support2Resistance(candles) {
+      const r = candles.slice(-40,-1);
+      const sh = r.map(c=>c.high).sort((a,b)=>b-a);
+      const sl = r.map(c=>c.low).sort((a,b)=>a-b);
+      return { R1: Math.max(sh[0], sh[Math.floor(sh.length*0.25)]||sh[0]*1.008), R2: Math.min(sh[0], sh[Math.floor(sh.length*0.25)]||sh[0]*1.008), S1: Math.min(sl[0], sl[Math.floor(sl.length*0.25)]||sl[0]*0.992), S2: Math.max(sl[0], sl[Math.floor(sl.length*0.25)]||sl[0]*0.992) };
+    }
+    function detectEmaStrategy(candles) {
+      const len = candles.length; if (len<80) return { valid:false, reason:'Not enough data' };
+      const e9 = computeEMA(candles,9), e20 = computeEMA(candles,20);
+      const start = len-42; if (start<2) return { valid:false, reason:'Not enough data' };
+      let crossIdx=-1, crossType=null;
+      for (let i=start;i<len-2;i++){
+        const e9p=e9[i-1].value, e20p=e20[i-1].value, e9c=e9[i].value, e20c=e20[i].value;
+        if (e9p<=e20p && e9c>e20c) { crossIdx=i; crossType='BULLISH_CROSSOVER'; }
+        else if (e9p>=e20p && e9c<e20c) { crossIdx=i; crossType='BEARISH_CROSSOVER'; }
+      }
+      if (crossIdx===-1) return { valid:false, reason:'No recent 9/20 EMA crossover' };
+      for (let i=crossIdx+1;i<len-1;i++){
+        const e9p=e9[i-1].value, e20p=e20[i-1].value, e9c=e9[i].value, e20c=e20[i].value;
+        if (crossType==='BULLISH_CROSSOVER' && e9p>=e20p && e9c<e20c) return { valid:false, reason:'Opposite crossover cancelled setup' };
+        if (crossType==='BEARISH_CROSSOVER' && e9p<=e20p && e9c>e20c) return { valid:false, reason:'Opposite crossover cancelled setup' };
+      }
+      for (let i=crossIdx+3;i<len-2;i++){
+        const pb = candles[i-1], rj = candles[i];
+        const pbEma9=e9[i-1].value, pbEma20=e20[i-1].value, rjEma9=e9[i].value;
+        const rjB = Math.abs(rj.close-rj.open), pbB = Math.abs(pb.close-pb.open);
+        if (crossType==='BULLISH_CROSSOVER'){
+          const isRed=pb.close<pb.open, touched=pb.low<=pbEma9*1.005||pb.low<=pbEma20*1.005;
+          const isGreen=rj.close>rj.open, bigger=rjB>pbB, above=rj.close>rjEma9;
+          if (isRed&&touched&&isGreen&&bigger&&above){
+            const last=candles[len-2], breaks=last.close>rj.high, aligned=e9[len-2].value>e20[len-2].value;
+            if (breaks&&aligned){
+              const sl=Math.min(pb.low,rj.low);
+              return { valid:true, type:'BULLISH_EMA_SETUP', entry:rj.high, sl:sl*0.998, note:'9/20 EMA Bullish Crossover → Red Pullback → Bigger Green Rejection → Confirmation High Break' };
+            }
+          }
+        }
+        if (crossType==='BEARISH_CROSSOVER'){
+          const isGreen=pb.close>pb.open, touched=pb.high>=pbEma9*0.995||pb.high>=pbEma20*0.995;
+          const isRed=rj.close<rj.open, bigger=rjB>pbB, below=rj.close<rjEma9;
+          if (isGreen&&touched&&isRed&&bigger&&below){
+            const last=candles[len-2], breaks=last.close<rj.low, aligned=e9[len-2].value<e20[len-2].value;
+            if (breaks&&aligned){
+              const sh=Math.max(pb.high,rj.high);
+              return { valid:true, type:'BEARISH_EMA_SETUP', entry:rj.low, sl:sh*1.002, note:'9/20 EMA Bearish Crossover → Green Pullback → Bigger Red Rejection → Confirmation Low Break' };
+            }
+          }
+        }
+      }
+      return { valid:false, reason:'Waiting for pullback + bigger rejection candle + confirmation' };
+    }
+    function detectChoppyMarket(candles) {
+      const len=candles.length; if (len<40) return false;
+      const e9=computeEMA(candles,9), e20=computeEMA(candles,20);
+      let crosses=0;
+      for (let i=len-30;i<len-1;i++){
+        const e9p=e9[i-1].value,e20p=e20[i-1].value,e9c=e9[i].value,e20c=e20[i].value;
+        if ((e9p<=e20p&&e9c>e20c)||(e9p>=e20p&&e9c<e20c)) crosses++;
+      }
+      const sep = Math.abs(e9[len-2].value-e20[len-2].value)/e20[len-2].value;
+      return crosses>=3 || sep<0.0015;
+    }
+    function detectLiquiditySweep(candles) {
+      const len=candles.length; if (len<30) return { swept:false, type:'NONE' };
+      const sc=candles[len-2], pc=candles.slice(len-30,len-2);
+      const lo=Math.min(...pc.map(c=>c.low)), hi=Math.max(...pc.map(c=>c.high));
+      const e9=computeEMA(candles,9), e20=computeEMA(candles,20);
+      const a=e9[len-2].value, b=e20[len-2].value;
+      if (sc.low<lo && sc.close>lo && sc.close>a && a>b) return { swept:true, type:'BULLISH_SWEEP', sweepLevel:lo };
+      if (sc.high>hi && sc.close<hi && sc.close<a && a<b) return { swept:true, type:'BEARISH_SWEEP', sweepLevel:hi };
+      return { swept:false, type:'NONE' };
+    }
+    function calculateVolumeMeter(v) {
+      if (v.length<30) return { label:'--' };
+      const r=v.slice(-30,-1), cur=v[v.length-2], avg=r.reduce((a,b)=>a+b,0)/r.length, ratio=cur/avg;
+      if (ratio>=1.8) return { label:'High' };
+      if (ratio<=0.6) return { label:'Low' };
+      return { label:'Normal' };
+    }
+
+    async function fetchGeminiAnalysis(promptText) {
+      const apiKey = "AQ.Ab8RN6JlscpiNZxFYALMW4sZrMkvr7i5wmUoQ5X8KRkByWb-2A";
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+      try {
+        const r = await fetch(url, { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ contents:[{ parts:[{ text: promptText }] }] }) });
+        const d = await r.json();
+        return d.candidates?.[0]?.content?.parts?.[0]?.text || null;
+      } catch (e) { return null; }
+    }
+
+    window.runAnalysisEngine = async function() {
+      if (isAnalyzing || currentCandles.length<80) return;
+      isAnalyzing = true;
+      const out = document.getElementById('ai-analysis-output');
+      const sp = document.getElementById('btn-spinner'), bt = document.getElementById('btn-text');
+      sp.classList.remove('hidden'); bt.innerText='Scanning (3s)...';
+      out.innerHTML = `<div class="flex flex-col items-center p-4 space-y-3"><div class="relative w-full max-w-xs h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="absolute inset-0 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 rounded-full animate-radar"></div></div><div class="text-amber-400 font-bold text-xs animate-pulse">⚡ AI scanning...</div></div>`;
+      await new Promise(r=>setTimeout(r,3000));
+      const len = currentCandles.length;
+      const e9 = computeEMA(currentCandles,9), e20 = computeEMA(currentCandles,20);
+      const bull = e9[len-2].value > e20[len-2].value;
+      const sr = calculate2Support2Resistance(currentCandles);
+      const sweep = detectLiquiditySweep(currentCandles);
+      const strat = detectEmaStrategy(currentCandles);
+      const vol = calculateVolumeMeter(currentVolumes);
+      const choppy = detectChoppyMarket(currentCandles);
+
+      document.getElementById('metric-ema').innerText = bull?'Bullish (9 > 20)':'Bearish (9 < 20)';
+      document.getElementById('metric-ema').className = bull?'text-emerald-400 font-bold':'text-rose-400 font-bold';
+
+      const sw = document.getElementById('metric-sweep');
+      if (sweep.swept) { sw.innerText = sweep.type==='BULLISH_SWEEP'?'Bullish Sweep':'Bearish Sweep'; sw.className = sweep.type==='BULLISH_SWEEP'?'text-emerald-400 font-bold':'text-rose-400 font-bold'; }
+      else { sw.innerText='No Sweep'; sw.className='text-slate-300'; }
+
+      const bias = strat.valid ? (strat.type.includes('BULLISH')?'BULLISH SETUP':'BEARISH SETUP') : (bull?'BULLISH BIAS':'BEARISH BIAS');
+      const vb = document.getElementById('metric-volatility');
+      vb.innerText = bias; vb.className = bias.includes('BULLISH')?'text-emerald-400 font-bold':'text-rose-400 font-bold';
+
+      const vm = document.getElementById('metric-volume');
+      vm.innerText = vol.label;
+      vm.className = vol.label==='High'?'text-emerald-400 font-bold':(vol.label==='Low'?'text-rose-400 font-bold':'text-amber-400 font-bold');
+
+      clearCanvasLines();
+      chartLines.push(candleSeries.createPriceLine({ price:sr.R1, color:'#f97316', lineWidth:2, lineStyle:LightweightCharts.LineStyle.Solid, title:'R1' }));
+      chartLines.push(candleSeries.createPriceLine({ price:sr.R2, color:'#fb923c', lineWidth:1, lineStyle:LightweightCharts.LineStyle.Dashed, title:'R2' }));
+      chartLines.push(candleSeries.createPriceLine({ price:sr.S1, color:'#ec4899', lineWidth:2, lineStyle:LightweightCharts.LineStyle.Solid, title:'S1' }));
+      chartLines.push(candleSeries.createPriceLine({ price:sr.S2, color:'#f472b6', lineWidth:1, lineStyle:LightweightCharts.LineStyle.Dashed, title:'S2' }));
+
+      const prompt = `Analyze crypto setup. Asset:${currentSymbol} TF:${currentTimeframe} EMA:${bull?'Bullish':'Bearish'} Sweep:${sweep.swept?sweep.type:'None'} Setup:${strat.valid?strat.note:'None'} Choppy:${choppy?'Yes':'No'} Vol:${vol.label}. Reply in 2 short English lines. If no valid entry, say only: "No valid entry right now. Wait for a clear setup."`;
+      const ai = await fetchGeminiAnalysis(prompt);
+      sp.classList.add('hidden'); bt.innerText='Scan Market Setup'; isAnalyzing=false;
+
+      if (!strat.valid || choppy) {
+        const wait = choppy ? 'Choppy market — no-trade zone.' : (strat.reason||'No valid entry.');
+        out.innerHTML = `
+          <div class="w-full space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+              <span class="text-xs font-bold text-slate-400">${currentSymbol} (${currentTimeframe}):</span>
+              <span class="px-4 py-1.5 rounded-full text-xs font-black bg-amber-500/20 text-amber-400 border border-amber-500/40">⏳ NO VALID ENTRY — WAIT</span>
+            </div>
+            <div class="p-2.5 bg-slate-900 rounded-lg border border-white/20 text-center"><p class="text-[11px] text-white italic">🤖 AI: ${ai || wait}</p></div>
+          </div>`;
+        return;
+      }
+
+      const entry = strat.entry, sl = strat.sl;
+      const risk = Math.abs(entry-sl);
+      const isBull = strat.type.includes('BULLISH');
+      const tp1 = isBull ? entry+risk*2 : entry-risk*2;
+      const tp2 = isBull ? entry+risk*3 : entry-risk*3;
+
+      out.innerHTML = `
+        <div class="w-full space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <span class="text-xs font-bold text-slate-400">${currentSymbol} (${currentTimeframe}):</span>
+            <span class="px-4 py-1.5 rounded-full text-xs font-black ${isBull?'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40':'bg-rose-500/20 text-rose-400 border border-rose-500/40'}">${isBull?'🚀 LIVE BUY':'📉 LIVE SELL'}</span>
+          </div>
+          <div class="text-[11px] text-slate-400 font-bold">📍 ${strat.note}</div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center font-mono">
+            <div class="bg-slate-900 p-2 rounded border border-slate-800"><span class="block text-slate-500 text-[10px]">ENTRY</span><strong class="text-blue-400">$${formatPrice(entry)}</strong></div>
+            <div class="bg-slate-900 p-2 rounded border border-slate-800"><span class="block text-slate-500 text-[10px]">TP1 (1:2)</span><strong class="text-emerald-400">$${formatPrice(tp1)}</strong></div>
+            <div class="bg-slate-900 p-2 rounded border border-slate-800"><span class="block text-slate-500 text-[10px]">TP2 (1:3)</span><strong class="text-emerald-300">$${formatPrice(tp2)}</strong></div>
+            <div class="bg-slate-900 p-2 rounded border border-slate-800"><span class="block text-slate-500 text-[10px]">SL</span><strong class="text-rose-400">$${formatPrice(sl)}</strong></div>
+          </div>
+          ${ai?`<div class="p-2.5 bg-slate-900 rounded-lg border border-indigo-500/30 text-center"><p class="text-[11px] text-indigo-300 italic">🤖 AI: ${ai}</p></div>`:''}
+        </div>`;
+
+      chartLines.push(candleSeries.createPriceLine({ price:entry, color:'#2563eb', lineWidth:2, title:'ENTRY' }));
+      chartLines.push(candleSeries.createPriceLine({ price:tp1, color:'#22c55e', lineWidth:2, title:'TP1' }));
+      chartLines.push(candleSeries.createPriceLine({ price:tp2, color:'#16a34a', lineWidth:2, lineStyle:LightweightCharts.LineStyle.Dashed, title:'TP2' }));
+      chartLines.push(candleSeries.createPriceLine({ price:sl, color:'#ef4444', lineWidth:2, title:'SL' }));
+    };
+
+    window.changeTimeframe = function(tf) {
+      currentTimeframe = tf;
+      ['5m','15m','1h','4h'].forEach(t => {
+        const b = document.getElementById(`tf-${t}`);
+        if (b) b.className = t===tf ? "px-2.5 py-1 text-[11px] font-bold bg-indigo-600 text-white rounded" : "px-2.5 py-1 text-[11px] font-bold text-slate-400 rounded";
+      });
+      loadAssetData();
+    };
+    window.changeAsset = function(sym) {
+      currentSymbol = sym;
+      allSymbols.forEach(s => {
+        const b = document.getElementById(`btn-${s}`);
+        if (b) b.className = s===sym ? 'px-3 py-1.5 rounded-lg font-bold text-xs bg-indigo-600 text-white whitespace-nowrap' : 'px-3 py-1.5 rounded-lg font-bold text-xs bg-slate-800 text-slate-300 whitespace-nowrap';
+      });
+      buildDarkCanvasChart(); loadAssetData();
+    };
+
+    // ============= BACKTESTER =============
+    function openBacktester() {
+      document.getElementById('backtest-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeBacktester() {
+      document.getElementById('backtest-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    window.openBacktester = openBacktester;
+    window.closeBacktester = closeBacktester;
+
+    // --- Indicators for backtest ---
+    function btEMA(c, p) {
+      const k = 2/(p+1), out = new Array(c.length).fill(null);
+      let prev = c.slice(0,p).reduce((a,b)=>a+b,0)/p;
+      for (let i=0;i<c.length;i++){ if (i<p-1) continue; if (i===p-1){out[i]=prev;continue;} prev = c[i]*k+prev*(1-k); out[i]=prev; }
+      return out;
+    }
+    function btSMA(c, p) { return c.map((_,i)=> i<p-1?null:c.slice(i-p+1,i+1).reduce((a,b)=>a+b,0)/p); }
+    function btRSI(c, p=14) {
+      const o = new Array(c.length).fill(null);
+      let g=0,l=0;
+      for (let i=1;i<=p;i++){ const d=c[i]-c[i-1]; if (d>=0) g+=d; else l-=d; }
+      let ag=g/p, al=l/p;
+      o[p] = al===0?100:100-100/(1+ag/al);
+      for (let i=p+1;i<c.length;i++){ const d=c[i]-c[i-1]; const gn=d>0?d:0, ls=d<0?-d:0; ag=(ag*(p-1)+gn)/p; al=(al*(p-1)+ls)/p; o[i]=al===0?100:100-100/(1+ag/al); }
+      return o;
+    }
+    function btATR(h, l, c, p=14) {
+      const tr = c.map((_,i)=> i===0?h[i]-l[i]:Math.max(h[i]-l[i],Math.abs(h[i]-c[i-1]),Math.abs(l[i]-c[i-1])));
+      const o = new Array(c.length).fill(null);
+      let s=0; for (let i=0;i<p;i++) s+=tr[i];
+      o[p-1]=s/p;
+      for (let i=p;i<c.length;i++) o[i]=(o[i-1]*(p-1)+tr[i])/p;
+      return o;
+    }
+
+    function resolveOp(tok, ctx) {
+      const s = String(tok).trim();
+      const n = parseFloat(s);
+      if (!isNaN(n) && String(n)===s) return n;
+      const m = s.match(/^(\w+)\((\d+)\)$/);
+      if (m) return ctx.ind[`${m[1].toUpperCase()}_${m[2]}`]?.[ctx.i] ?? null;
+      const u = s.toUpperCase();
+      if (u==='CLOSE') return ctx.closes[ctx.i];
+      if (u==='OPEN') return ctx.opens[ctx.i];
+      if (u==='HIGH') return ctx.highs[ctx.i];
+      if (u==='LOW') return ctx.lows[ctx.i];
+      if (u==='VOLUME') return ctx.volumes[ctx.i];
+      if (u==='MACD') return ctx.ind.MACD?.[ctx.i] ?? null;
+      if (u==='MACD_SIGNAL') return ctx.ind.MACD_SIGNAL?.[ctx.i] ?? null;
+      if (u==='VWAP') return ctx.ind.VWAP?.[ctx.i] ?? null;
+      return null;
+    }
+    function evalCond(c, ctx, prev) {
+      const L = resolveOp(c.left, ctx), R = resolveOp(c.right, ctx);
+      const Lp = prev?resolveOp(c.left, prev):null, Rp = prev?resolveOp(c.right, prev):null;
+      if (L==null || R==null) return false;
+      switch(c.op){
+        case 'crosses_above': return Lp!=null&&Rp!=null&&Lp<=Rp&&L
